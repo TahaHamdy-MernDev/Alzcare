@@ -1,31 +1,40 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { USER_TYPES } = require('../constants/authConstant');
+/**
+ * Middleware function to authenticate a user.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next function to call.
+ * @returns {Object} - The response object.
+ */
 const authenticate = (req, res, next) => {
-//   const accessToken = req.cookies.accessToken
-//   if (!accessToken) return res.status(401).json({ success: false, error: 'No token provided' });
-//   jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-//     if (err) return res.status(403).json({ success: false, error: 'Invalid token' });
-//     req.user = user;
-//   })
-//   next();
-const authToken = req.headers.authorization;
+  const authToken = req.headers.authorization;
   if (authToken) {
-    const token = authToken.split(" ")[1]; 
+    const token = authToken.split(" ")[1];
     try {
       const decodedPayload = jwt.verify(token, process.env.JWT_SECRET);
       req.user = decodedPayload;
       next();
     } catch (error) {
-      return res.status(401).json({ message: "invalid token, access denied" });
+      return res.unAuthorized({ message: "invalid token, access denied" });
     }
   } else {
-    return res
-      .status(401)
-      .json({ message: "no token provided, access denied" });
+    return res.unAuthorized({ message: "no token provided, access denied" });
   }
 }
 
+/**
+ * Authorizes access based on user role.
+ * @param {string} allowedRole - The role allowed to access the resource.
+ * @returns {Function} - Middleware function to authorize access.
+*/
 const authorizeRoles = (allowedRole) => (req, res, next) => {
-
+  /**
+   * Authenticates the request.
+   * @param {Object} req - The request object.
+   * @param {Object} res - The response object.
+   * @param {Function} next - The next middleware function.
+  */
   authenticate(req, res, () => {
     const hasMatchingRole = req.user.role === allowedRole
     if (hasMatchingRole) {
@@ -37,8 +46,8 @@ const authorizeRoles = (allowedRole) => (req, res, next) => {
 };
 
 module.exports = {
-	authenticate,
-	authorizeAdmin: authorizeRoles('Admin'),
-	authorizeInstructor: authorizeRoles('Instructor'),
-	authorizeStudent: authorizeRoles('Student'),
+  authenticate,
+  Admin: authorizeRoles(USER_TYPES.Admin),
+  CareGiver: authorizeRoles(USER_TYPES.CareGiver),
+  Patient: authorizeRoles(USER_TYPES.Patient),
 };

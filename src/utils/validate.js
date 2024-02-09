@@ -1,14 +1,16 @@
-const validateParamsWithJoi = (schemaKeys) => {
+
+const validateRequestParameters = (validationSchema) => {
   return (req, res, next) => {
-    // console.log(req.body)
-    const { error } = schemaKeys.validate(req.body, { abortEarly: false, convert: false });
-    if (error) {
-      const message = error.details.map((el) => el.message)
-      // return res.validationError({data:message, message :  `Invalid values in parameters` });
-      return res.validationError({ message });
+    const validationResult = validationSchema.validate(req.body, { abortEarly: false, convert: false });
+
+    if (validationResult.error) {
+      const errorMessages = validationResult.error.details.map((errorDetail) => errorDetail.message);
+      console.error(`Validation error: ${errorMessages.join(', ')}`);
+      return res.validationError({ message: errorMessages });
     }
+
     next();
   };
 };
 
-module.exports = { validateParamsWithJoi };
+module.exports = { validateRequestParameters };

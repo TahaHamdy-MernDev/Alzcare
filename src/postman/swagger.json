@@ -17,7 +17,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Uname\": \"johnDoe\",\r\n    \"mail\": \"john@example.com\",\r\n    \"tel\": \"2015550123\", \r\n    \"password\": \"Password1@\" \r\n  }",
+							"raw": "{\r\n    \"Uname\": \"johnDoe\",\r\n    \"mail\": \"iruweyycov@maildax.me\",\r\n    \"tel\": \"230215550123\", \r\n    \"password\": \"Password1@\" \r\n  }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2443,7 +2443,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": "http://localhost:4000/alzcare/v1"
+			"value": "https://alzcare-demo.onrender.com/alzcare/v1"
 		}
 	]
 }

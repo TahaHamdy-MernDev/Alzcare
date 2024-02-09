@@ -42,18 +42,7 @@ function getDifferenceOfTwoDatesInTime(currentDate, toDate) {
     return `${remainingSeconds} second(s)`;
   }
 }
-// function getDifferenceOfTwoDatesInTime (currentDate,toDate){
-//   let hours = toDate.diff(currentDate,'hour');
-//   currentDate =  currentDate.add(hours, 'hour');
-//   let minutes = toDate.diff(currentDate,'minute');
-//   currentDate =  currentDate.add(minutes, 'minute');
-//   let seconds = toDate.diff(currentDate,'second');
-//   currentDate =  currentDate.add(seconds, 'second');
-//   if (hours){
-//     return `${hours} hour, ${minutes} minute and ${seconds} second`; 
-//   }
-//   return `${minutes} minute and ${seconds} second`; 
-// }
+
 
 /**
  * checkUniqueFieldsInDatabase: check unique fields in database for insert or update operation.
