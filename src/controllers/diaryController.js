@@ -20,7 +20,7 @@ exports.createDiary = asyncHandler(async (req, res) => {
     for (let type of fileTypes) {
         await uploadAndSet(req, type);
     }
-    const data = new Diary({ ...req.body, user: req.user._id, title, details })
+    const data = { ...req.body, user: req.user._id, title, details }
     const newDiary = await dbService.create(Diary, data)
     res.success({ data: newDiary })
 })

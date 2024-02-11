@@ -1,20 +1,80 @@
-const mongoose = require('mongoose');
+const { Schema, model } = require("mongoose");
 
-const communitySchema = new mongoose.Schema({
-  community_ID: {
-    type: String,
+const commentSchema = new Schema({
+  postId: {
+    type: Schema.Types.ObjectId,
+    ref: "Post",
     required: true,
-    unique: true
   },
-  post_ID: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Post'
-  }],
-  patient_ID: {
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  image: {
+    type: Object,
+    default: {
+      url: "",
+      publicId: null
+    }
+  },
+  text: {
     type: String,
     required: true,
-    ref: 'Patient'
-  }
+  },
+  likes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+}, {
+  timestamps: true,
 });
 
-module.exports = mongoose.model('Community', communitySchema);
+const postSchema = new Schema({
+
+  text: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: Object,
+    default: {
+      url: "",
+      publicId: null,
+    },
+  },
+  user: {
+    type: String,
+    required: true,
+    ref: 'User'
+  },
+  likes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
+}, {
+  timestamps: true,
+});
+
+
+postSchema.pre('find', function (next) {
+  this.populate('user')
+  next();
+});
+postSchema.pre('findOne', function (next) {
+  this.populate('user')
+  next();
+});
+commentSchema.pre('find', function (next) {
+  this.populate('user')
+  next();
+});
+const CommentModel = model("Comment", commentSchema);
+const PostModel = model("Post", postSchema);
+module.exports = {
+  CommentModel, PostModel
+}

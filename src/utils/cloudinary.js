@@ -65,6 +65,7 @@ const uploadAndSet = async (req, type) => {
       url: result.secure_url,
       publicId: result.public_id,
     };
+    fs.unlinkSync(filePath);
   }
 };
 
@@ -84,6 +85,7 @@ const deleteOldFiles = async (doc, type) => {
       console.log(`Deleted old ${type} from Cloudinary`);
     } catch (error) {
       console.error(`Failed to delete old ${type} from Cloudinary`, error);
+      throw new Error("Internal Server Error (cloudinary)");
     }
   }
 };
@@ -111,6 +113,7 @@ const updateFiles = async (req, doc, type) => {
       url: result.secure_url,
       publicId: result.public_id,
     };
+    fs.unlinkSync(filePath);
   }
 };
 
@@ -123,10 +126,12 @@ const deleteManyFiles=async(doc,types) =>{
       }
   }
 try {
+  console.log(publicIds);
    const result = await cloudinary.api.delete_resources(publicIds);
   return result;
 } catch (error) {
   console.error(`Failed to delete old ${types} from Cloudinary`, error);
+  throw new Error("Internal Server Error (cloudinary)");
 }
  
 }

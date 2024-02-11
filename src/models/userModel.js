@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt =require("bcrypt")
+const bcrypt = require("bcrypt")
 const { USER_TYPES } = require('../constants/authConstant');
 function convertObjectToEnum(obj) {
   const enumArr = [];
@@ -10,6 +10,13 @@ const userSchema = new mongoose.Schema({
   Uname: {
     type: String,
     required: true
+  },
+  profileImg: {
+    type: Object,
+    default: {
+      url: "https://res.cloudinary.com/dlaphiz77/image/upload/v1707563000/octicon_feed-person-16_poam0y.png",
+      publicId: null
+    }
   },
   Lname: {
     type: String,
@@ -28,7 +35,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  
+
   patientCode: {
     type: String,
   },
