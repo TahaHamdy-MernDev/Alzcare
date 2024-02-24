@@ -13,7 +13,7 @@ const hpp = require('hpp');
 const routes = require('../routes');
 const { errorHandler } = require('../utils/errorHandler');
 const { corsOptions, mongoSanitizeOptions, helmetOptions } = require('./options');
-
+global.__basedir = path.resolve(__dirname, '..');
 // Set view engine and views directory
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
