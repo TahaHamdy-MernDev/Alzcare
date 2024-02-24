@@ -13,10 +13,6 @@ module.exports = {
       "string.email": "Invalid email format",
       "any.required": "Email is required",
     }),
-    tel: Joi.string().required().messages({
-      "string.base": "Phone number must be a string",
-      "any.required": "Phone number is required",
-    }),
     password: Joi.string().regex(passwordRegex).required().messages({
       "string.base": "Password must be a string",
       "string.pattern.base":
@@ -35,10 +31,6 @@ module.exports = {
       "string.base": "Email must be a string",
       "string.email": "Invalid email format",
       "any.required": "Email is required",
-    }),
-    tel: Joi.string().required().messages({
-      "string.base": "Phone number must be a string",
-      "any.required": "Phone number is required",
     }),
     patientCode:  Joi.string().required().messages({
       "any.required": "patientCode is required",

@@ -1,4 +1,3 @@
-const common = require("../utils/common");
 const databaseService = require("../utils/dbService");
 const asyncHandler = require("../utils/asyncHandler");
 const { CommentModel, PostModel } = require("../models/communityModel");

@@ -12,7 +12,7 @@ const User = require('../models/userModel')
  * @returns {Promise<void>} - A promise that resolves when the patient account is successfully created.
  */
 exports.PatientRegister = asyncHandler(async (req, res) => {
-  const { Uname, mail, tel, password } = req.body;
+  const { Uname, mail, password } = req.body;
 
   // Generate a unique patient code
   const patientCode = await common.generatePatientCode();
@@ -24,7 +24,7 @@ exports.PatientRegister = asyncHandler(async (req, res) => {
   });
 
   // Check if the email and telephone number are unique in the database
-  const uniqueFields = ["mail", "tel"];
+  const uniqueFields = ["mail"];
   const checkUniqueFields = await common.checkUniqueFieldsInDatabase(
     User,
     uniqueFields,
@@ -51,7 +51,7 @@ exports.PatientRegister = asyncHandler(async (req, res) => {
  * @returns {Promise<void>} - A promise that resolves when the care giver account is successfully created.
  */
 exports.CareGiverRegister = asyncHandler(async (req, res) => {
-  const { Uname, mail, patientCode, tel, password } = req.body;
+  const { Uname, mail, patientCode, password } = req.body;
 
   // Find the patient with the provided patient code
   const patient = await dbService.findOne(User, { patientCode });
@@ -61,12 +61,12 @@ exports.CareGiverRegister = asyncHandler(async (req, res) => {
 
   // Create a new User object with the provided data
   const data = new User({
-    Uname, mail, tel, password, patientCode,
+    Uname, mail, password, patientCode,
     userType: authConstant.USER_TYPES.CareGiver,
   });
 
   // Check if the email and telephone number are unique in the database
-  const uniqueFields = ["mail", "tel"];
+  const uniqueFields = ["mail"];
   const checkUniqueFields = await common.checkUniqueFieldsInDatabase(
     User,
     uniqueFields,
@@ -125,5 +125,8 @@ exports.login = asyncHandler(async (req, res) => {
  */
 exports.getCurrentUser = asyncHandler(async (req, res) => {
   const user = await dbService.findOne(User, { _id: req.user.id });
-  console.log(user);
+  if (!user) {
+    return res.failure({ message: "user not found...!" });
+  }
+  res.success({ data: user });
 });
