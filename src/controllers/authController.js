@@ -19,7 +19,7 @@ exports.PatientRegister = asyncHandler(async (req, res) => {
 
   // Create a new User object with the provided data
   const data = new User({
-    Uname, mail, tel, password, patientCode,
+    Uname, mail, password, patientCode,
     userType: authConstant.USER_TYPES.Patient,
   });
 
