@@ -40,12 +40,12 @@ exports.updateDiary = asyncHandler(async (req, res) => {
 exports.deleteDiary = asyncHandler(async (req, res) => {
     const fileTypes = ['image', 'video', 'voiceNote'];
     const diaryToDelete = await dbService.findOne(Diary, { _id: req.params.id })
-     if (!diaryToDelete) {
-        return res.recordNotFound();
+    if (!diaryToDelete) {
+        return res.recordNotFound("Diary");
     }
     await deleteManyFiles(diaryToDelete, fileTypes)
-    
+
     await dbService.deleteOne(Diary, diaryToDelete._id);
-    return res.success({ message: "Diary Deleted Successfully" });
+    res.success({ message: "Diary Deleted Successfully" });
 
 })

@@ -1,6 +1,6 @@
 function errorHandler(error, req, res, next) {
-  console.log(error);
-  return res.internalServerError({ data: { message: error.message } });
+  console.log(error.stack);
+  return res.internalServerError( { message: error.message });
 }
 
 module.exports = { errorHandler };

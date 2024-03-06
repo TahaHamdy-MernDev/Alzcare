@@ -1,6 +1,6 @@
-const cloudinary = require('cloudinary').v2; 
+const cloudinary = require('cloudinary').v2;
 const fs = require("fs");
-const path = require("path"); 
+const path = require("path");
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -65,7 +65,6 @@ const uploadAndSet = async (req, type) => {
       url: result.secure_url,
       publicId: result.public_id,
     };
-    fs.unlinkSync(filePath);
   }
 };
 
@@ -113,34 +112,33 @@ const updateFiles = async (req, doc, type) => {
       url: result.secure_url,
       publicId: result.public_id,
     };
-    fs.unlinkSync(filePath);
   }
 };
 
-const deleteManyFiles=async(doc,types) =>{
+const deleteManyFiles = async (doc, types) => {
   let publicIds = [];
 
   for (let type of types) {
-      if (doc[type] && doc[type].publicId) {
-          publicIds.push(doc[type].publicId);
-      }
+    if (doc[type] && doc[type].publicId) {
+      publicIds.push(doc[type].publicId);
+    }
   }
-try {
-  console.log(publicIds);
-   const result = await cloudinary.api.delete_resources(publicIds);
-  return result;
-} catch (error) {
-  console.error(`Failed to delete old ${types} from Cloudinary`, error);
-  throw new Error("Internal Server Error (cloudinary)");
-}
- 
+  try {
+    console.log(publicIds);
+    const result = await cloudinary.api.delete_resources(publicIds);
+    return result;
+  } catch (error) {
+    console.error(`Failed to delete old ${types} from Cloudinary`, error);
+    throw new Error("Internal Server Error (cloudinary)");
+  }
+
 }
 
 module.exports = {
-  uploadFile, 
-  deleteFile, 
+  uploadFile,
+  deleteFile,
   deleteManyFiles,
-  uploadAndSet, 
+  uploadAndSet,
   deleteOldFiles,
   updateFiles
 }

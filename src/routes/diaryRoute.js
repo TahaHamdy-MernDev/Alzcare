@@ -1,9 +1,9 @@
 const router = require('express').Router();
 
-const diaryController = require('../controllers/diaryController');
-const { authenticate } = require('../middlewares/auth');
-const idValidator = require('../utils/idValidator');
 const { upload } = require('../utils/upload');
+const { authenticate } = require('../middlewares/auth');
+const diaryController = require('../controllers/diaryController');
+const idValidator = require('../utils/idValidator');
 const { validateRequestParameters } = require('../utils/validate');
 const { createDiaryKeys } = require('../utils/validation/diaryValidation');
 

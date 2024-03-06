@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const idValidator = (req, res, next) => {
   const id = req.params.id;
-  
   // Check if id is provided
   if (!id) {
     return res.badRequest({message: 'ID is not provided.'});

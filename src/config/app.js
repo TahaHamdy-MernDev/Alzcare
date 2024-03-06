@@ -1,4 +1,3 @@
-// Import dependencies
 const express = require('express');
 const app = express();
 const logger = require('morgan');
@@ -17,7 +16,7 @@ global.__basedir = path.resolve(__dirname, '..');
 // Set view engine and views directory
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
- 
+
 // Set the response handler
 app.use(require('../utils/response/responseHandler'));
 
@@ -37,7 +36,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); // Swag
 
 // Error handling
 app.use('*', (req, res) => {
-  res.status(404).json({ error: { message: 'Route Not Found' } });
+  return res.recordNotFound('This Route')
 });
 app.use(errorHandler);
 

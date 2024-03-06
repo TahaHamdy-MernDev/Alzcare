@@ -6,6 +6,4 @@ module.exports = {
     recordNotFound: 'RECORD_NOT_FOUND',
     validationError: 'VALIDATION_ERROR',
     unauthorized: 'UNAUTHORIZED',
-    
   };
-  
