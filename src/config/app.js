@@ -13,28 +13,30 @@ const routes = require('../routes');
 const { errorHandler } = require('../utils/errorHandler');
 const { corsOptions, mongoSanitizeOptions, helmetOptions } = require('./options');
 global.__basedir = path.resolve(__dirname, '..');
-// Set view engine and views directory
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 
-// Set the response handler
+
 app.use(require('../utils/response/responseHandler'));
 
-// Middleware
-app.use(logger('dev')); // Logging
-app.use(express.json({ limit: '10kb' })); // JSON body parser with size limit
-app.use(express.urlencoded({ extended: true, limit: '10mb' })); // URL-encoded body parser with size limit
-app.use(xss()); // Cross-site scripting protection
-app.use(hpp()); // HTTP parameter pollution protection
-app.use(cors(corsOptions)); // Cross-origin resource sharing
-app.use(mongoSanitize(mongoSanitizeOptions)); // MongoDB query injection protection
-app.use(helmet(helmetOptions)); // Helmet security headers
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../views'));
 
-// Routes
-app.use('/alzcare/v1', routes); // Main API routes
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); // Swagger API documentation
+app.use(logger('dev'));
+app.use(express.json({ limit: '10kb' })); 
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(xss()); 
+app.use(hpp());
+app.use(cors(corsOptions)); 
+app.use(mongoSanitize(mongoSanitizeOptions)); 
+app.use(helmet(helmetOptions)); 
 
-// Error handling
+
+app.use('/alzcare/v1', routes); 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); 
+app.get('/', (req, res) => {
+  const userId = '65b2e4be2936cb7634a912c4';
+  res.render('socket', { userId: userId });
+});
+
 app.use('*', (req, res) => {
   return res.recordNotFound('This Route')
 });

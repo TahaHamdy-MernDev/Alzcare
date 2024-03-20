@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medication Reminder</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const socket = io('http://localhost:4000');
+            const userId = '<%= userId %>'; // Dynamically set the user ID
+
+            socket.emit('registerUser', userId);
+
+            socket.on('medicationReminder', (message) => {
+                alert(`Medication Reminder: ${message}`);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Medication Reminder App</h1>
+    <p>Keep this page open to receive medication reminders.</p>
+</body>
+</html>

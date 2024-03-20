@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>Medication Reminder</title>
+      
+       <script>
+        //    document.addEventListener('DOMContentLoaded', function() {
+               const socket = io('http://localhost:4000');
+               const userId = '65b2e4be2936cb7634a912c4';
+               socket.emit('registerUser', userId);
+               socket.on('medicationReminder', (message) => {
+                console.log("ggggggggggggggg");
+                   alert(`Medication Reminder: ${message}`);
+               });
+        //    });
+           setInterval(() => {
+                    console.log("Medication Reminder");
+                }, 500);
+       </script>
+   </head>
+   <body>
+       <h1>Medication Reminder App</h1>
+       <p>Keep this page open to receive medication reminders.</p>
+   </body>
+   </html>

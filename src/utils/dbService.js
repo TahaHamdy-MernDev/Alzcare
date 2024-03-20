@@ -109,7 +109,9 @@ const dbService = {
  * @throws {Error} If there is an error in the find process.
  */
   findMany: (model, filter, options = {}) => {
-    return model.find(filter, options)
+    const sortOption = options.sort ? options.sort : {};
+    return model.find(filter, null, options)
+      .sort(sortOption) 
       .then((result) => result)
       .catch((error) => {
         throw error;
