@@ -60,6 +60,7 @@ const deleteFile = async (publicId) => {
 const uploadAndSet = async (req, type) => {
   if (req.files[type]) {
     // const filePath = path.join(__dirname, `uploads/${req.files[type][0].filename}`);
+    console.log(__basedir);
     const filePath = `${__basedir}/uploads/${req.files[type][0].filename}`;
     console.log(filePath);
     const result = await uploadFile(filePath);
