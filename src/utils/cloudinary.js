@@ -1,7 +1,7 @@
 const cloudinary = require('cloudinary').v2;
 const fs = require("fs");
 const path = require("path");
-
+// const gg = require('../uploads')
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -59,7 +59,8 @@ const deleteFile = async (publicId) => {
  */
 const uploadAndSet = async (req, type) => {
   if (req.files[type]) {
-    const filePath = path.join(__dirname, `uploads/${req.files[type][0].filename}`);
+    // const filePath = path.join(__dirname, `uploads/${req.files[type][0].filename}`);
+    const filePath = `../uploads/${req.files[type][0].filename}`;
     const result = await uploadFile(filePath);
     req.body[type] = {
       url: result.secure_url,
@@ -103,7 +104,8 @@ const deleteOldFiles = async (doc, type) => {
  */
 const updateFiles = async (req, doc, type) => {
   if (req.files[type]) {
-    const filePath = path.join(__dirname, `uploads/${req.files[type][0].filename}`);
+    // const filePath = path.join(__dirname, `uploads/${req.files[type][0].filename}`);
+    const filePath =`../uploads/${req.files[type][0].filename}`
     if (doc[type] && doc[type].publicId) {
       await cloudinary.uploader.destroy(doc[type].publicId);
     }
