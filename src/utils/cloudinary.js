@@ -59,7 +59,7 @@ const deleteFile = async (publicId) => {
  */
 const uploadAndSet = async (req, type) => {
   if (req.files[type]) {
-    const filePath = path.join(__dirname, `../uploads/${req.files[type][0].filename}`);
+    const filePath = path.join(__dirname, `uploads/${req.files[type][0].filename}`);
     const result = await uploadFile(filePath);
     req.body[type] = {
       url: result.secure_url,
@@ -103,7 +103,7 @@ const deleteOldFiles = async (doc, type) => {
  */
 const updateFiles = async (req, doc, type) => {
   if (req.files[type]) {
-    const filePath = path.join(__dirname, `../uploads/${req.files[type][0].filename}`);
+    const filePath = path.join(__dirname, `uploads/${req.files[type][0].filename}`);
     if (doc[type] && doc[type].publicId) {
       await cloudinary.uploader.destroy(doc[type].publicId);
     }
