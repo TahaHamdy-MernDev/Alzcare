@@ -1,7 +1,7 @@
 const databaseService = require("../utils/dbService");
 const asyncHandler = require("../utils/asyncHandler");
 const { CommentModel, PostModel } = require("../models/communityModel");
-const { uploadFile } = require("../utils/cloudinary");
+const { uploadFile, deleteOldFiles } = require("../utils/cloudinary");
 const path = require("path")
 exports.getAllUserPosts = asyncHandler(async (req, res) => {
     const posts = await databaseService.findMany(PostModel, { user: req.params.id })
@@ -82,3 +82,20 @@ exports.commentToggleLike = asyncHandler(async (req, res) => {
     await comment.save()
     res.success({ message: 'Like status updated successfully' ,data:comment})
 })
+exports.deletePost = asyncHandler(async (req, res) => {
+    const { id: postId } = req.params;
+  
+    const post = await databaseService.findOne(PostModel, { _id: postId });
+    if (!post) {
+      return res.recordNotFound({ message: "Post not found" });
+    }
+    await CommentModel.deleteMany({ postId });
+    if (post.image && post.image.publicId) {
+        await deleteOldFiles(post, "image");
+    }
+
+    await databaseService.deleteOne(PostModel, { _id: postId });
+  
+    res.success({ message: "Post deleted successfully" });
+  });
+  

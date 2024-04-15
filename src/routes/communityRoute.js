@@ -15,5 +15,5 @@ router.post('/post/:id/comment',idValidator,upload.single('image'),validateReque
 router.get('/post/:id/comments',idValidator, communityController.getPostComments);
 router.put('/post/:id/like',idValidator, communityController.postToggleLike);
 router.put('/comment/:id/like',idValidator, communityController.commentToggleLike);
-
+router.delete('/post/:id',idValidator, communityController.deletePost)
 module.exports = router;
