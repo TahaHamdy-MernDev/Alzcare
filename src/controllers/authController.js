@@ -91,7 +91,7 @@ exports.login = asyncHandler(async (req, res) => {
 });
 
 exports.getCurrentUser = asyncHandler(async (req, res) => {
-  const user = await dbService.findOne(User, { _id: req.user.id });
+  const user = await dbService.findOne(User, { _id: req.user._id });
   if (!user) {
     return res.failure({ message: "user not found...!" });
   }

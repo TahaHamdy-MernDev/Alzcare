@@ -1,4 +1,5 @@
 const authController = require("../controllers/authController");
+const { authenticate } = require("../middlewares/auth");
 const { validateRequestParameters } = require("../utils/validate");
 const userSchemaKeys = require("../utils/validation/authValidation");
 const router = require("express").Router();
@@ -20,5 +21,5 @@ router
     validateRequestParameters(userSchemaKeys.loginKeys),
     authController.login
   );
-
+router.post('/current-user',authenticate, authController.getCurrentUser)
 module.exports = router;
