@@ -10,5 +10,8 @@ router.use("/medical-details", require("./medicalDetailsRoute"));
 router.use("/medication-reminder", require("./medicationReminderRoute"));
 router.use("/profile", require("./profileRoute"));
 router.use("/chat", require("./chatRoute"));
+router.use("/notification", require("./notificationRoute"));
+
+
 
 module.exports = router;
