@@ -10,7 +10,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const hpp = require('hpp');
 const routes = require('../routes');
-const { errorHandler } = require('../utils/errorHandler');
+// const { errorHandler } = require('../utils/errorHandler');
 const { corsOptions, mongoSanitizeOptions, helmetOptions } = require('./options');
 global.__basedir = path.resolve(__dirname, '..');
 
@@ -40,6 +40,6 @@ app.get('/', (req, res) => {
 app.use('*', (req, res) => {
   return res.recordNotFound('This Route')
 });
-app.use(errorHandler);
+// app.use(errorHandler);
 
 module.exports = app;
