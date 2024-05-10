@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const communityController = require('../controllers/communityController');
-const { authenticate } = require('../middlewares/auth');
-const { upload } = require('../utils/upload');
-const { validateRequestParameters } = require('../utils/validate');
-const { createPostKeys, createCommentKeys } = require('../utils/validation/communityValidation');
-const idValidator = require('../utils/idValidator');
+const communityController = require('../../controllers/patient/communityController');
+const { authenticate } = require('../../middlewares/auth');
+const { upload } = require('../../utils/upload');
+const { validateRequestParameters } = require('../../utils/validate');
+const { createPostKeys, createCommentKeys } = require('../../utils/validation/communityValidation');
+const idValidator = require('../../utils/idValidator');
 router.use(authenticate)
 router.get('/user/:id/posts',idValidator, communityController.getAllUserPosts);
 router.get('/posts', communityController.getAllPosts);

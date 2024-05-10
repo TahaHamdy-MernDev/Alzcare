@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
-const mealAlarmController = require('../controllers/mealAlarmController');
-const idValidator = require('../utils/idValidator');
+const mealAlarmController = require('../../controllers/patient/mealAlarmController');
+const idValidator = require('../../utils/idValidator');
 
 router.get('/user/:id/mealAlarm', mealAlarmController.getAllUserMealAlarm)
 

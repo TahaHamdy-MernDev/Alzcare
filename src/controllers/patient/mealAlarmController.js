@@ -1,6 +1,6 @@
-const MealAlarmModel = require("../controllers/mealAlarmController")
-const databaseService = require("../utils/dbService");
-const asyncHandler = require("../utils/asyncHandler");
+const MealAlarmModel = require("./mealAlarmController")
+const databaseService = require("../../utils/dbService");
+const asyncHandler = require("../../utils/asyncHandler");
 exports.getAllUserMealAlarm = asyncHandler(async (req, res) => {
     const mealAlarms = await databaseService.findMany(MealAlarmModel, { user: req.params.id })
     res.success({ data: mealAlarms })

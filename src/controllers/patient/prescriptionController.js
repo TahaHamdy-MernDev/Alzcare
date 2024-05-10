@@ -1,11 +1,11 @@
-const PrescriptionModel = require("../models/prescriptionModel");
-const dbService = require("../utils/dbService");
-const asyncHandler = require("../utils/asyncHandler");
+const PrescriptionModel = require("../../models/prescriptionModel");
+const dbService = require("../../utils/dbService");
+const asyncHandler = require("../../utils/asyncHandler");
 const {
   uploadAndSet,
   deleteOldFiles,
   updateFiles,
-} = require("../utils/cloudinary");
+} = require("../../utils/cloudinary");
 exports.getAllPrescriptions = asyncHandler(async (req, res) => {
   const prescriptions = await dbService.findMany(PrescriptionModel, {
     user: req.params.id,

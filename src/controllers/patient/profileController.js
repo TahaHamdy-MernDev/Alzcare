@@ -1,8 +1,8 @@
-const dbService = require("../utils/dbService");
-const asyncHandler = require("../utils/asyncHandler");
-const User = require("../models/userModel");
+const dbService = require("../../utils/dbService");
+const asyncHandler = require("../../utils/asyncHandler");
+const User = require("../../models/userModel");
 const bcrypt = require("bcrypt");
-const { updateFiles } = require("../utils/cloudinary");
+const { updateFiles } = require("../../utils/cloudinary");
 exports.changeUserProfileImage = asyncHandler(async (req, res) => {
   const user = await dbService.findOne(User, { _id: req.user._id });
   if (!user) {

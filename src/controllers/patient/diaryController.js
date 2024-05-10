@@ -1,8 +1,8 @@
 
-const dbService = require("../utils/dbService");
-const asyncHandler = require("../utils/asyncHandler");
-const Diary = require("../models/diaryModel");
-const { uploadAndSet, deleteOldFiles, updateFiles, deleteManyFiles } = require("../utils/cloudinary");
+const dbService = require("../../utils/dbService");
+const asyncHandler = require("../../utils/asyncHandler");
+const Diary = require("../../models/diaryModel");
+const { uploadAndSet, deleteOldFiles, updateFiles, deleteManyFiles } = require("../../utils/cloudinary");
 exports.getAllDiaries = asyncHandler(async (req, res) => {
     const diaries = await dbService.findMany(Diary, { user: req.user._id })
     res.success({ data: diaries })

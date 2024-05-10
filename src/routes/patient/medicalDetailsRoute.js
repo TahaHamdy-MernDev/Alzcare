@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const idValidator = require("../utils/idValidator");
-const { authenticate } = require("../middlewares/auth");
-const { validateRequestParameters } = require("../utils/validate");
+const idValidator = require("../../utils/idValidator");
+const { authenticate } = require("../../middlewares/auth");
+const { validateRequestParameters } = require("../../utils/validate");
 const {
   createMedicalDetailsSchema,
   updateMedicalDetailsSchema,
-} = require("../utils/validation/medicalDetailsValidation");
-const medicalDetailsController = require("../controllers/medicalDetailsController");
+} = require("../../utils/validation/medicalDetailsValidation");
+const medicalDetailsController = require("../../controllers/patient/medicalDetailsController");
 router.get(
   "/get-all/:id",
   idValidator,

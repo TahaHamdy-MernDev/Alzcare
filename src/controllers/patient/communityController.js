@@ -1,7 +1,7 @@
-const databaseService = require("../utils/dbService");
-const asyncHandler = require("../utils/asyncHandler");
-const { CommentModel, PostModel } = require("../models/communityModel");
-const { uploadFile, deleteOldFiles } = require("../utils/cloudinary");
+const databaseService = require("../../utils/dbService");
+const asyncHandler = require("../../utils/asyncHandler");
+const { CommentModel, PostModel } = require("../../models/communityModel");
+const { uploadFile, deleteOldFiles } = require("../../utils/cloudinary");
 const path = require("path")
 exports.getAllUserPosts = asyncHandler(async (req, res) => {
     const posts = await databaseService.findMany(PostModel, { user: req.params.id })

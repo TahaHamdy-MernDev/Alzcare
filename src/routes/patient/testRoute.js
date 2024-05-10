@@ -1,13 +1,13 @@
 const router = require("express").Router();
-const idValidator = require("../utils/idValidator");
-const { authenticate } = require("../middlewares/auth");
-const { validateRequestParameters } = require("../utils/validate");
-const { upload } = require("../utils/upload");
-const testController = require("../controllers/testController");
+const idValidator = require("../../utils/idValidator");
+const { authenticate } = require("../../middlewares/auth");
+const { validateRequestParameters } = require("../../utils/validate");
+const { upload } = require("../../utils/upload");
+const testController = require("../../controllers/patient/testController");
 const {
   testSchemaKeys,
   updateTestSchema,
-} = require("../utils/validation/testValidation");
+} = require("../../utils/validation/testValidation");
 
 router.get("/get-all/:id", idValidator, testController.getAllTests);
 router.post(

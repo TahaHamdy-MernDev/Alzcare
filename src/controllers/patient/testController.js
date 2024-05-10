@@ -1,10 +1,9 @@
-const dbService = require("../utils/dbService");
-const asyncHandler = require("../utils/asyncHandler");
-const TestModel = require("../models/testModel");
-const { uploadAndSet, deleteOldFiles, updateFiles } = require("../utils/cloudinary");
+const dbService = require("../../utils/dbService");
+const asyncHandler = require("../../utils/asyncHandler");
+const TestModel = require("../../models/testModel");
+const { uploadAndSet, deleteOldFiles, updateFiles } = require("../../utils/cloudinary");
 exports.getAllTests = asyncHandler(async (req, res) => {
     const tests = await dbService.findMany(TestModel, { user: req.params.id })
-
     res.success({ data: tests })
 })
 exports.getTestById = asyncHandler(async (req, res) => {

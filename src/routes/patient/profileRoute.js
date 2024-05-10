@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { upload } = require("../utils/upload");
-const { authenticate } = require("../middlewares/auth");
-const profileController = require("../controllers/profileController");
-const { validateRequestParameters } = require("../utils/validate");
+const { upload } = require("../../utils/upload");
+const { authenticate } = require("../../middlewares/auth");
+const profileController = require("../../controllers/patient/profileController");
+const { validateRequestParameters } = require("../../utils/validate");
 const {
   updateProfileKeys,
   changePasswordKeys,
-} = require("../utils/validation/profileValidation");
+} = require("../../utils/validation/profileValidation");
 router.put(
   "/change-profile-image",
   authenticate,

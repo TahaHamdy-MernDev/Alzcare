@@ -1,5 +1,7 @@
 const MedicationReminderModel = require("../models/MedicationReminderModel");
 const NotificationModel = require("../models/notificationModel");
+const { createAndSaveNotification } = require("../utils/notificationHelper");
+const { getUserSocketId } = require("../utils/socketManager");
 
 function getDayOfWeekInArabic(date) {
   const dayOfWeekEn = date
@@ -17,7 +19,7 @@ function getDayOfWeekInArabic(date) {
   return dayMap[dayOfWeekEn];
 }
 
-async function findAndNotifyReminders(io, userSockets) {
+async function findAndNotifyReminders(io) {
   const now = new Date();
   const dayOfWeek = getDayOfWeekInArabic(now);
   const currentTime = now.toTimeString().slice(0, 5);
@@ -25,22 +27,37 @@ async function findAndNotifyReminders(io, userSockets) {
     daysOfWeek: dayOfWeek,
     times: currentTime,
   }).populate("user");
-  reminders.forEach((reminder) => {
-    const message = `Time to take your medication: ${reminder.medicationName}`;
-    const userId = reminder.user._id.toString();
 
-    const notification = new NotificationModel({
-      user: reminder.user,
-      message: message,
-    });
-    notification.save();
-    const socketId = userSockets[userId];
-    if (socketId && io) {
-      io.to(socketId).emit("medicationReminder", message);
-    } else {
-      console.log(`No active socket for user ${userId}`); 
-    }
-  });
+await Promise.all(reminders.map(async (reminder) => {
+  const message = `Time to take your medication: ${reminder.medicationName}`;
+  const userId = reminder.user._id.toString();
+
+  await createAndSaveNotification(userId, message);
+
+  const socketId = getUserSocketId(userId);
+  if (socketId && io) {
+    io.to(socketId).emit("medicationReminder", message);
+  } else {
+    console.log(`No active socket for user ${userId}`);
+  }
+}));
+
+  // reminders.forEach((reminder) => {
+  //   const message = `Time to take your medication: ${reminder.medicationName}`;
+  //   const userId = reminder.user._id.toString();
+
+  //   const notification = new NotificationModel({
+  //     user: reminder.user,
+  //     message: message,
+  //   });
+  //   notification.save();
+  //   const socketId = userSockets[userId];
+  //   if (socketId && io) {
+  //     io.to(socketId).emit("medicationReminder", message);
+  //   } else {
+  //     console.log(`No active socket for user ${userId}`); 
+  //   }
+  // });
 }
 
 module.exports = { findAndNotifyReminders };

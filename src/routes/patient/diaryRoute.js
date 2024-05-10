@@ -1,11 +1,11 @@
 const router = require('express').Router();
 
-const { upload } = require('../utils/upload');
-const { authenticate } = require('../middlewares/auth');
-const diaryController = require('../controllers/diaryController');
-const idValidator = require('../utils/idValidator');
-const { validateRequestParameters } = require('../utils/validate');
-const { createDiaryKeys } = require('../utils/validation/diaryValidation');
+const { upload } = require('../../utils/upload');
+const { authenticate } = require('../../middlewares/auth');
+const diaryController = require('../../controllers/patient/diaryController');
+const idValidator = require('../../utils/idValidator');
+const { validateRequestParameters } = require('../../utils/validate');
+const { createDiaryKeys } = require('../../utils/validation/diaryValidation');
 
 router.get('/get-all', authenticate, diaryController.getAllDiaries);
 router.get('/get-one/:id', idValidator, authenticate, diaryController.getDiaryById);

@@ -1,7 +1,7 @@
-const dbService = require("../utils/dbService");
-const asyncHandler = require("../utils/asyncHandler");
-const { uploadAndSet } = require("../utils/cloudinary");
-const ChatMessageModel = require("../models/chatMessageModel");
+const dbService = require("../../utils/dbService");
+const asyncHandler = require("../../utils/asyncHandler");
+const { uploadAndSet } = require("../../utils/cloudinary");
+const ChatMessageModel = require("../../models/chatMessageModel");
 
 exports.getChatMessages = asyncHandler(async (req, res) => {
   const { recipientId } = req.query;

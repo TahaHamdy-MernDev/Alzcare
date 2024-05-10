@@ -1,6 +1,6 @@
-const dbService = require("../utils/dbService");
-const asyncHandler = require("../utils/asyncHandler");
-const medicalDetailsModel = require("../models/medicalDetailsModel");
+const dbService = require("../../utils/dbService");
+const asyncHandler = require("../../utils/asyncHandler");
+const medicalDetailsModel = require("../../models/medicalDetailsModel");
 
 exports.getAllMedicalDetails = asyncHandler(async (req, res) => {
     const medicalDetails = await dbService.findMany(medicalDetailsModel, { user: req.params.id })
