@@ -1,15 +1,20 @@
-const databaseService = require("../../utils/dbService");
-const asyncHandler = require("../../utils/asyncHandler");
-const { CommentModel, PostModel } = require("../../models/communityModel");
-const { uploadFile, deleteOldFiles } = require("../../utils/cloudinary");
+const databaseService = require("../utils/dbService");
+const asyncHandler = require("../utils/asyncHandler");
+const { CommentModel, PostModel } = require("../models/communityModel");
+const { uploadFile, deleteOldFiles, uploadAndSet } = require("../utils/cloudinary");
 const path = require("path")
 exports.getAllUserPosts = asyncHandler(async (req, res) => {
     const posts = await databaseService.findMany(PostModel, { user: req.params.id })
     res.success({ data: posts })
 })
 exports.getAllPosts = asyncHandler(async (req, res) => {
-    const posts = await databaseService.findMany(PostModel, {})
-    res.success({ data: posts })
+    const allPosts = await databaseService.findMany(PostModel, {});
+    const postsWithCommentCounts = await Promise.all(allPosts.map(async (post) => {
+        const commentCount = await databaseService.count(CommentModel, { postId: post._id });
+        return { ...post.toObject(), commentCount };
+    }));
+  
+    res.success({ data: postsWithCommentCounts })
 })
 exports.getPost = asyncHandler(async (req, res) => {
     const post = await databaseService.findOne(PostModel, { _id: req.params.id })
@@ -40,14 +45,16 @@ exports.createPost = asyncHandler(async (req, res) => {
 exports.createComment = asyncHandler(async (req, res) => {
     const post = await databaseService.findOne(PostModel, { _id: req.params.id })
     if (!post) { return res.recordNotFound({ message: "Post not found" }) }
-    if (req.file && req.file.filename) {
-        const filePath = path.join(__dirname, `../uploads/${req.file.filename}`);
-        const result = await uploadFile(filePath);
-        req.body.image = {
-            url: result.secure_url,
-            publicId: result.public_id,
-        };
-    }
+    await uploadAndSet(req, 'image')
+    // if (req.file && req.file.filename) {
+    //     const filePath = path.join(__dirname, `../uploads/${req.file.filename}`);
+    //     console.log(filePath);
+    //     const result = await uploadFile(filePath);
+    //     req.body.image = {
+    //         url: result.secure_url,
+    //         publicId: result.public_id,
+    //     };
+    // }
     let data = { ...req.body, postId: post._id, user: req.user._id }
     const comment = await databaseService.create(CommentModel, data)
     res.success({ data: comment })

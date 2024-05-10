@@ -1,14 +1,14 @@
 const cloudinary = require('cloudinary').v2;
-const fs = require("fs");
-const path = require("path");
-// const gg = require('../uploads')
+const fs = require("fs").promises;
+const logger = require("./logger"); // hypothetical logger module
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-
+const getFilePath = (filename) => `${__basedir}/uploads/${filename}`;
 /**
  * Asynchronously uploads a file to Cloudinary.
  *
@@ -17,17 +17,20 @@ cloudinary.config({
  * @returns {Promise<Object>} The result of the upload operation.
  * @throws {Error} If an error occurs during the upload operation.
  */
-const uploadFile = async (file) => {
+async function uploadFile(file) {
   try {
-    const result = await cloudinary.uploader.upload(file, { resource_type: "auto" });
-    console.log('File uploaded successfully:', result);
-    fs.unlinkSync(file);
+    const result = await cloudinary.uploader.upload(file);
+    logger.info('File uploaded successfully:', result);
+    await fs.unlink(file);
     return result;
   } catch (error) {
-    console.error('Error uploading file:', error);
-    throw new Error("Internal Server Error (cloudinary)");
+    logger.error('Error uploading file:', error);
+    if (error.http_code === 499) {
+      logger.warn('Timeout occurred during file upload to Cloudinary.');
+    }
+    throw new Error('Internal Server Error (cloudinary)');
   }
-};
+}
 
 /**
  * Deletes a file from Cloudinary.
@@ -59,8 +62,6 @@ const deleteFile = async (publicId) => {
  */
 const uploadAndSet = async (req, type) => {
   if (req.files[type]) {
-    // const filePath = path.join(__dirname, `uploads/${req.files[type][0].filename}`);
-    console.log(__basedir);
     const filePath = `${__basedir}/uploads/${req.files[type][0].filename}`;
     console.log(filePath);
     const result = await uploadFile(filePath);

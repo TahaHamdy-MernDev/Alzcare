@@ -47,6 +47,7 @@
     "yamljs": "^0.3.0"
   },
   "devDependencies": {
+    "@types/dotenv-safe": "^8.1.6",
     "nodemon": "^3.0.1"
   }
 }

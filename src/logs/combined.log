@@ -17,3 +17,56 @@
 {"level":"info","message":"[GET] /alzcare/v1/care-giver/test 404 32.739 ms"}
 {"level":"info","message":"[GET] /alzcare/v1/care-giver/test 200 10.181 ms"}
 {"level":"info","message":"[DELETE] /alzcare/v1/care-giver/test 404 13.391 ms"}
+{"level":"info","message":"[GET]  200 1,001.722 ms"}
+{"level":"info","message":"[GET] /favicon.ico 404 1.505 ms"}
+{"level":"info","message":"[GET]  304 9.352 ms"}
+{"level":"info","message":"[GET]  304 16.613 ms"}
+{"level":"error","message":"Uncaught Exception: promise is not defined"}
+{"level":"info","message":"[POST] /alzcare/v1/chat 200 70.782 ms"}
+{"level":"info","message":"[POST]  500 27.773 ms"}
+{"level":"info","message":"[POST]  500 32.425 ms"}
+{"level":"info","message":"[POST]  500 18.724 ms"}
+{"level":"info","message":"[POST]  500 25.333 ms"}
+{"level":"error","message":"Uncaught Exception: promise is not defined"}
+{"level":"error","message":"Uncaught Exception: promise is not defined"}
+{"level":"error","message":"Uncaught Exception: promise is not defined"}
+{"level":"error","message":"Uncaught Exception: ReferenceError: promise is not defined\n    at process.<anonymous> (/mnt/d/AlzCare/src/server.js:24:43)\n    at process.emit (node:events:530:35)\n    at emit (node:internal/process/promises:150:20)\n    at processPromiseRejections (node:internal/process/promises:284:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:96:32)"}
+{"level":"error","message":"Unhandled Rejection at:"}
+{"level":"error","message":"Unhandled Rejection: databaseService is not defined"}
+{"level":"error","message":"Unhandled Rejection: recipientId is not defined"}
+{"level":"info","message":"[POST] /alzcare/v1/community 404 46.411 ms"}
+{"level":"info","message":"[POST]  500 5,088.575 ms"}
+{"level":"info","message":"[POST]  500 5,027.55 ms"}
+{"level":"info","message":"[POST]  500 55.408 ms"}
+{"level":"info","message":"[POST]  500 5,127.835 ms"}
+{"level":"info","message":"[POST]  500 5,111.574 ms"}
+{"level":"info","message":"[POST]  500 5,137.561 ms"}
+{"level":"info","message":"[POST]  500 5,130.889 ms"}
+{"level":"info","message":"[POST]  500 5,154.941 ms"}
+{"level":"info","message":"[POST]  500 5,102.797 ms"}
+{"level":"info","message":"[POST] /alzcare/v1/chat 200 30.943 ms"}
+{"level":"info","message":"[POST]  500 5,022.322 ms"}
+{"level":"info","message":"[POST]  500 5,179.572 ms"}
+{"level":"info","message":"[POST]  500 5,104.539 ms"}
+{"level":"info","message":"[POST]  500 5,039.652 ms"}
+{"level":"info","message":"[POST]  500 5,089.427 ms"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"info","message":"[POST]  500 5,114.124 ms"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"info","message":"[POST]  500 5,113.186 ms"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"info","message":"[POST]  500 5,131.55 ms"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"info","message":"[POST]  500 5,088.903 ms"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"info","message":"[POST]  500 5,131.25 ms"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"info","message":"[POST]  500 5,116.697 ms"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"info","message":"[POST]  500 5,106.934 ms"}
+{"level":"info","message":"[POST]  500 5,190.825 ms"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"info","message":"[POST]  500 5,101.035 ms"}
+{"level":"info","message":"[GET] /alzcare/v1/community 200 133.642 ms"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"info","message":"[POST]  500 5,082.086 ms"}

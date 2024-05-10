@@ -31,6 +31,17 @@ async function findAndNotifyReminders(io) {
 await Promise.all(reminders.map(async (reminder) => {
   const message = `Time to take your medication: ${reminder.medicationName}`;
   const userId = reminder.user._id.toString();
+  const caregiverId = reminder.user.caregiverId;
+  if (caregiverId) {
+    const caregiverMessage = `Reminder for your patient to take medication: ${reminder.medicationName}`;
+    await createAndSaveNotification(caregiverId, caregiverMessage);
+    const caregiverSocketId = getUserSocketId(caregiverId);
+    if (caregiverSocketId && io) {
+      io.to(caregiverSocketId).emit("medicationReminder", caregiverMessage);
+    } else {
+      console.log(`No active socket for caregiver ${caregiverId}`);
+    }
+  }
 
   await createAndSaveNotification(userId, message);
 

@@ -1,0 +1,17 @@
+{"level":"error","message":"Uncaught Exception: promise is not defined"}
+{"level":"error","message":"Uncaught Exception: promise is not defined"}
+{"level":"error","message":"Uncaught Exception: promise is not defined"}
+{"level":"error","message":"Uncaught Exception: promise is not defined"}
+{"level":"error","message":"Uncaught Exception: ReferenceError: promise is not defined\n    at process.<anonymous> (/mnt/d/AlzCare/src/server.js:24:43)\n    at process.emit (node:events:530:35)\n    at emit (node:internal/process/promises:150:20)\n    at processPromiseRejections (node:internal/process/promises:284:27)\n    at process.processTicksAndRejections (node:internal/process/task_queues:96:32)"}
+{"level":"error","message":"Unhandled Rejection at:"}
+{"level":"error","message":"Unhandled Rejection: databaseService is not defined"}
+{"level":"error","message":"Unhandled Rejection: recipientId is not defined"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
