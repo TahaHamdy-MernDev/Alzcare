@@ -1,26 +1,65 @@
+<!-- D:\AlzCare\src\views\index.html -->
 <!DOCTYPE html>
-   <html lang="en">
-   <head>
-       <meta charset="UTF-8">
-       <title>Medication Reminder</title>
-      
-       <script>
-        //    document.addEventListener('DOMContentLoaded', function() {
-               const socket = io('http://localhost:4000');
-               const userId = '65b2e4be2936cb7634a912c4';
-               socket.emit('registerUser', userId);
-               socket.on('medicationReminder', (message) => {
-                console.log("ggggggggggggggg");
-                   alert(`Medication Reminder: ${message}`);
-               });
-        //    });
-           setInterval(() => {
-                    console.log("Medication Reminder");
-                }, 500);
-       </script>
-   </head>
-   <body>
-       <h1>Medication Reminder App</h1>
-       <p>Keep this page open to receive medication reminders.</p>
-   </body>
-   </html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medication Reminder</title>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+        import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging.js";
+
+        const firebaseConfig = {
+            apiKey: "AizaSyBtQIKAKVK6ZPZYføm1K60vJQRZ5whzPbE",
+            authDomain: "E9-b5c68.firebaseapp.com",
+            projectId: "ee-b5c68",
+            storageBucket: "egg-b5c68.appspot.com",
+            messagingSenderId: "277936587444",
+            appId: "1:277936587444:web:abcd1234",
+            measurementId: "G-M81YEKECXH"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const messaging = getMessaging(app);
+
+        // Request permission to send notifications
+        Notification.requestPermission().then((permission) => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted.');
+                // Get the FCM token
+                getToken(messaging, { vapidKey: 'YOUR_VAPID_KEY' }).then((currentToken) => {
+                    if (currentToken) {
+                        console.log('FCM Token:', currentToken);
+                        // Send the token to your server and update the user's deviceToken
+                    } else {
+                        console.log('No registration token available. Request permission to generate one.');
+                    }
+                }).catch((err) => {
+                    console.log('An error occurred while retrieving token. ', err);
+                });
+            } else {
+                console.log('Unable to get permission to notify.');
+            }
+        });
+
+        // Handle incoming messages
+        onMessage(messaging, (payload) => {
+            console.log('Message received. ', payload);
+            // Customize notification here
+            const notificationTitle = payload.notification.title;
+            const notificationOptions = {
+                body: payload.notification.body,
+            };
+
+            new Notification(notificationTitle, notificationOptions);
+        });
+    </script>
+</head>
+<body>
+    <h1>Medication Reminder</h1>
+</body>
+</html>

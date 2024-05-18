@@ -42,8 +42,8 @@ app.use(helmet(helmetOptions));
 
 app.use('/alzcare/v1', routes); 
 app.get('/', (req, res) => {
-  const userId = '65b2e4be2936cb7634a912c4';
-  res.render('socket', { userId: userId });
+  // const userId = '661d70d61be4f317ee45409c';
+  res.render('socket');
 });
 
 app.use('*', (req, res) => {

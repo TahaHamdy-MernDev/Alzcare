@@ -86,7 +86,6 @@ exports.login = asyncHandler(async (req, res) => {
   if (!isPasswordMatched) {
     return res.failure({ message: "Wrong Password...!" });
   }
-
   createSendToken(user, res);
 });
 
@@ -96,4 +95,9 @@ exports.getCurrentUser = asyncHandler(async (req, res) => {
     return res.failure({ message: "user not found...!" });
   }
   res.success({ data: user });
+});
+exports.saveDeviceToken = asyncHandler(async (req, res) => {
+  const { token } = req.body;
+  await dbService.updateOne(User, req.user._id, { deviceToken: token });
+  res.success({ message: 'Device token saved successfully' });
 });

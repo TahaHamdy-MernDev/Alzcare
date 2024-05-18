@@ -70,3 +70,18 @@
 {"level":"info","message":"[GET] /alzcare/v1/community 200 133.642 ms"}
 {"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
 {"level":"info","message":"[POST]  500 5,082.086 ms"}
+{"level":"info","message":"[GET]  200 254.895 ms"}
+{"level":"info","message":"[GET]  200 307.61 ms"}
+{"level":"info","message":"[GET]  404 7.132 ms"}
+{"level":"info","message":"[GET] /favicon.ico 404 1.43 ms"}
+{"level":"info","message":"[GET]  200 28.004 ms"}
+{"level":"info","message":"[GET]  304 5.096 ms"}
+{"level":"info","message":"[GET]  200 7.546 ms"}
+{"level":"info","message":"[GET]  200 17.594 ms"}
+{"level":"info","message":"[GET]  200 53.025 ms"}
+{"level":"info","message":"[GET]  304 1.078 ms"}
+{"level":"info","message":"[GET]  500 3,837.772 ms"}
+{"level":"info","message":"[GET]  500 3,540.3 ms"}
+{"level":"info","message":"[GET]  200 55.726 ms"}
+{"level":"info","message":"[GET]  304 17.994 ms"}
+{"level":"info","message":"[GET]  304 352.773 ms"}
