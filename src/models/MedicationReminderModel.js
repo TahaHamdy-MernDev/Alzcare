@@ -30,6 +30,8 @@ const medicationReminderSchema = new Schema({
   endDate: {
     type: Date,
   },
+},{
+  timestamps:true
 });
 
 const MedicationReminderModel = model(
