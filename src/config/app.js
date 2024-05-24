@@ -32,8 +32,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
 app.use(express.json({ limit: '10kb' })); 
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(hpp());
@@ -42,38 +40,12 @@ app.use(mongoSanitize(mongoSanitizeOptions));
 app.use(helmet(helmetOptions)); 
 
 app.use('/alzcare/v1', routes); 
-app.get('/', (req, res) => {
-  // const userId = '661d70d61be4f317ee45409c';
-  res.render('socket');
-});
+
 cron.schedule("* * * * *", async () => {
   console.log("Running a task every minute");
   await findAndNotifyReminders();
 });
-async function sendWelcomeNotification(userToken) {
-  const message = {
-    notification: {
-      title: 'النوتفكيشن اشتغلت ي ندى',
-      body: 'ياريت نبطل رغي بقي 🙂😂'
-    },
-    // token: userToken
-    token: "cDDrSRKNStK9EbTdxOrrjg:APA91bGM2YS4-dEx8H0FoVJJy1chzGZ23nlZuO3GXNjp0TslO5EK0XPNru_CusSYw5jTmWPoHVf1BQ6S96Z1Azg9w6eKJ2UMqT4b5Vy3JlIs5F-DMdyZh2_ja3LMweSnszCPXHDgm8C0"
-  };
 
-
-await admin.messaging().send(message)
-    .then(response => {
-      console.log('Successfully sent message:', response);
-    })
-    .catch((error) => {
-      if (error.code === 'messaging/registration-token-not-registered') {
-        console.error('Registration token is not registered. Removing it from the database...');
-
-      } else {
-        console.error('Error sending message:', error);
-      }})
-}
-// sendWelcomeNotification();
 app.use('*', (req, res) => {
   return res.recordNotFound('This Route')
 });
