@@ -4,7 +4,6 @@ const medicalDetailsModel = require("../../models/medicalDetailsModel");
 
 exports.getAllPatientMedicalDetails = asyncHandler(async (req, res) => {
   let query = { user: req.user.patient };
-  console.log(query);
   const medicalDetails = await dbService.findMany(medicalDetailsModel, query);
   res.success({ data: medicalDetails });
 });

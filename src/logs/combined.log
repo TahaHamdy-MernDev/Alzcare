@@ -85,3 +85,9 @@
 {"level":"info","message":"[GET]  200 55.726 ms"}
 {"level":"info","message":"[GET]  304 17.994 ms"}
 {"level":"info","message":"[GET]  304 352.773 ms"}
+{"level":"info","message":"[POST] /alzcare/v1/medication-reminder 200 256.326 ms"}
+{"level":"info","message":"[POST] /alzcare/v1/medication-reminder 200 227.085 ms"}
+{"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
+{"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
+{"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
+{"level":"error","message":"Unhandled Rejection: message is not defined"}

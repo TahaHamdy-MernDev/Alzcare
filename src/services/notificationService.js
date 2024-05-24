@@ -1,5 +1,5 @@
 const admin = require('../config/firebase/firebase')
-const sendNotification = (deviceToken, title, body) => {
+const sendNotification = async(deviceToken, title, body) => {
     const message = {
       notification: {
         title: title,
@@ -8,7 +8,7 @@ const sendNotification = (deviceToken, title, body) => {
       token: deviceToken
     };
   
-    admin.messaging().send(message)
+   await admin.messaging().send(message)
       .then((response) => {
         console.log('Successfully sent message:', response);
       })

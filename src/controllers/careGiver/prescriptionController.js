@@ -18,7 +18,7 @@ exports.getPatientPatientPrescriptionById = asyncHandler(async (req, res) => {
 });
 exports.createPatientPrescription = asyncHandler(async (req, res) => {
   await uploadAndSet(req, "prescriptionImage");
-  console.log(req.user)
+ 
   const data = { ...req.body, user: req.user.patient };
   const prescription = await dbService.create(PrescriptionModel, data);
   res.success({ data: prescription });

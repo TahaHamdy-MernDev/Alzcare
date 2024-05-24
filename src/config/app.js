@@ -10,9 +10,10 @@ const { errorHandler } = require('../utils/errorHandler');
 const { corsOptions, mongoSanitizeOptions, helmetOptions } = require('./options');
 global.__basedir = path.resolve(__dirname, '..');
 const logger = require('../utils/logger');
-
+const admin= require('./firebase/firebase')
 app.use(require('../utils/response/responseHandler'));
-
+const cron = require('node-cron');
+const { findAndNotifyReminders } = require('./reminders');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views'));
 
@@ -26,7 +27,7 @@ app.use((req, res, next) => {
   const start = process.hrtime();
   res.on('finish', () => { 
       const durationInMilliseconds = getDurationInMilliseconds(start);
-    logger.info(`[${req.method}] ${req.baseUrl} ${res.statusCode} ${durationInMilliseconds.toLocaleString()} ms`);
+      logger.info(`[${req.method}] ${req.baseUrl} ${res.statusCode} ${durationInMilliseconds.toLocaleString()} ms`);
   });
   next();
 });
@@ -45,7 +46,34 @@ app.get('/', (req, res) => {
   // const userId = '661d70d61be4f317ee45409c';
   res.render('socket');
 });
+cron.schedule("* * * * *", async () => {
+  console.log("Running a task every minute");
+  await findAndNotifyReminders();
+});
+async function sendWelcomeNotification(userToken) {
+  const message = {
+    notification: {
+      title: 'النوتفكيشن اشتغلت ي ندى',
+      body: 'ياريت نبطل رغي بقي 🙂😂'
+    },
+    // token: userToken
+    token: "cDDrSRKNStK9EbTdxOrrjg:APA91bGM2YS4-dEx8H0FoVJJy1chzGZ23nlZuO3GXNjp0TslO5EK0XPNru_CusSYw5jTmWPoHVf1BQ6S96Z1Azg9w6eKJ2UMqT4b5Vy3JlIs5F-DMdyZh2_ja3LMweSnszCPXHDgm8C0"
+  };
 
+
+await admin.messaging().send(message)
+    .then(response => {
+      console.log('Successfully sent message:', response);
+    })
+    .catch((error) => {
+      if (error.code === 'messaging/registration-token-not-registered') {
+        console.error('Registration token is not registered. Removing it from the database...');
+
+      } else {
+        console.error('Error sending message:', error);
+      }})
+}
+// sendWelcomeNotification();
 app.use('*', (req, res) => {
   return res.recordNotFound('This Route')
 });

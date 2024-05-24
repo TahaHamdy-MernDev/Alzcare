@@ -15,3 +15,7 @@
 {"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
 {"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
 {"error":{"http_code":499,"message":"Request Timeout","name":"TimeoutError"},"level":"error","message":"Error uploading file:"}
+{"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
+{"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
+{"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
+{"level":"error","message":"Unhandled Rejection: message is not defined"}

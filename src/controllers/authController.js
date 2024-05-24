@@ -43,7 +43,7 @@ exports.CareGiverRegister = asyncHandler(async (req, res) => {
   if (!patient) {
     return res.failure({ message: "There is no patient with this code...!" });
   }
-
+ 
   const data = new User({
     Uname,
     mail,
