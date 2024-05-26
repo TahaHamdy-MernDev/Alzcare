@@ -16,9 +16,8 @@ exports.getAllPosts = asyncHandler(async (req, res) => {
         const commentCount = await databaseService.count(CommentModel, { postId: post._id });
         return { ...post.toObject(), commentCount };
     }));
-  
     res.success({ data: postsWithCommentCounts })
-})
+}) 
 exports.getPost = asyncHandler(async (req, res) => {
     const post = await databaseService.findOne(PostModel, { _id: req.params.id })
     if (!post) { return res.recordNotFound({ message: "Post not found" }) }
