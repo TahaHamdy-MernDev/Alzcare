@@ -91,3 +91,13 @@
 {"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
 {"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
 {"level":"error","message":"Unhandled Rejection: message is not defined"}
+{"level":"info","message":"[POST] /alzcare/v1/community 401 11.285 ms"}
+{"level":"info","message":"[POST] /alzcare/v1/auth 200 483.616 ms"}
+{"level":"info","message":"[POST] /alzcare/v1/community 401 2.105 ms"}
+{"level":"info","message":"[POST] /alzcare/v1/community 401 1.892 ms"}
+{"api_key":"429359413165878","asset_id":"8d2b9c722eef8e81b2859eebd164cb86","bytes":62247,"created_at":"2024-05-26T09:26:38Z","etag":"563e011b6eace1c4c91dd18f3771a281","folder":"","format":"png","height":368,"level":"info","message":"File uploaded successfully:","original_filename":"1716715597778--293934df-580d-46a3-8769-8f686c1f556b--Screenshot 2024-02-06 012017","placeholder":false,"public_id":"nb9tvovo3cz8jb7k3tax","resource_type":"image","secure_url":"https://res.cloudinary.com/dlaphiz77/image/upload/v1716715598/nb9tvovo3cz8jb7k3tax.png","signature":"ff815987e90c453612f89ceb928eb508f686a17c","tags":[],"type":"upload","url":"http://res.cloudinary.com/dlaphiz77/image/upload/v1716715598/nb9tvovo3cz8jb7k3tax.png","version":1716715598,"version_id":"2488df7d22cf14aafa3633b81679ad2d","width":261}
+{"level":"info","message":"[POST] /alzcare/v1/community 200 1,881.448 ms"}
+{"level":"info","message":"[POST] /alzcare/v1/community 200 4.42 ms"}
+{"api_key":"429359413165878","asset_id":"0533dd3bab3941d2dc440cf911486b40","bytes":62247,"created_at":"2024-05-26T09:28:45Z","etag":"563e011b6eace1c4c91dd18f3771a281","folder":"","format":"png","height":368,"level":"info","message":"File uploaded successfully:","original_filename":"1716715724371--b227f321-1acb-4ff8-866c-c784e809ae97--Screenshot 2024-02-06 012017","placeholder":false,"public_id":"w5esr5hhpzlcgrotre4f","resource_type":"image","secure_url":"https://res.cloudinary.com/dlaphiz77/image/upload/v1716715725/w5esr5hhpzlcgrotre4f.png","signature":"58b3a663a835c81a143f52f008f6c77fd15ff2af","tags":[],"type":"upload","url":"http://res.cloudinary.com/dlaphiz77/image/upload/v1716715725/w5esr5hhpzlcgrotre4f.png","version":1716715725,"version_id":"bfdc88d12f1c83f01c58e48846af2f38","width":261}
+{"level":"info","message":"[POST] /alzcare/v1/community 200 2,216.415 ms"}
+{"level":"info","message":"[POST] /alzcare/v1/community 200 4.897 ms"}

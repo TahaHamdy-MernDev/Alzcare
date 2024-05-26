@@ -1,10 +1,11 @@
-const Joi = require("joi")
+const Joi = require("joi");
 
 exports.createPostKeys = Joi.object({
-    text: Joi.string(),
-    image: Joi.string()
-})
+    text: Joi.string().allow('').empty(''),
+    image: Joi.string().allow('').empty('')
+});
+
 exports.createCommentKeys = Joi.object({
-    text: Joi.string(),
-    image: Joi.string()
-})
+    text: Joi.string().allow('').empty(''),
+    image: Joi.string().allow('').empty('')
+});
