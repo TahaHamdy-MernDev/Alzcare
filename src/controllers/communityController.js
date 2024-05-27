@@ -68,8 +68,8 @@ exports.postToggleLike = asyncHandler(async (req, res) => {
     if (likeIndex === -1) {
         post.likes.push(loggedInUser);
         const user = await databaseService.findOne(User, { _id: post.user._id });
-        await createAndSaveNotification(post.user._id, message);
         const message = `${user.Uname} added like on your post`;
+        await createAndSaveNotification(post.user._id, message);
         await sendNotification(user.deviceToken,'Community Notification', message);
     } else {
         post.likes.splice(likeIndex, 1);
