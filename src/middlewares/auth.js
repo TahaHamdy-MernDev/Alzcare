@@ -19,7 +19,7 @@ const authenticate = (req, res, next) => {
           res.unAuthorized({ message: "Invalid token." });
         }
       }
-    } else {
+    } else { 
       res.unAuthorized({ message: "Token must be a Bearer token." });
     }
   } else {

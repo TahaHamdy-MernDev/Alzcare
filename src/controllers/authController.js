@@ -43,7 +43,7 @@ exports.CareGiverRegister = asyncHandler(async (req, res) => {
   if (!patient) {
     return res.failure({ message: "There is no patient with this code...!" });
   }
- 
+
   const data = new User({
     Uname,
     mail,
@@ -99,7 +99,10 @@ exports.getCurrentUser = asyncHandler(async (req, res) => {
 exports.saveDeviceToken = asyncHandler(async (req, res) => {
   const { token } = req.body;
   const { _id } = req.user;
+  if (!token || token == undefined || token == null) {
+    return res.badRequest({ message: "please provide valid device token" });
+  }
   console.log("device tokeeeeeeen: ", token);
-  await dbService.updateOne(User, {_id}, { deviceToken: token });
-  res.success({ message: 'Device token saved successfully' });
+  await dbService.updateOne(User, { _id }, { deviceToken: token });
+  res.success({ message: "Device token saved successfully" });
 });
