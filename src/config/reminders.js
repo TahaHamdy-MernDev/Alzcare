@@ -27,6 +27,7 @@ async function findAndNotifyReminders() {
   const reminders = await MedicationReminderModel.find({
     daysOfWeek: dayOfWeek,
     times: currentTime,
+    endDate: { $gte: now },
   }).populate("user");
   reminders.forEach(async (reminder) => {
     console.log(reminder);
@@ -37,9 +38,7 @@ async function findAndNotifyReminders() {
         patientCode: reminder.user.patientCode,
       });
       const userDeviceToken = user.deviceToken;
-      console.log("userrrrrrr-----------------",user);
       const userId = user._id;
-      console.log("careGiver_ID-----------------",user.careGiver_ID);
       const caregiverId = user.careGiver_ID?._id;
       const caregiverDeviceToken = user.careGiver_ID?.deviceToken;
       const title = "Medication Reminder";
