@@ -115,3 +115,5 @@
 {"level":"info","message":"[POST] /alzcare/v1/auth 200 7.083 ms"}
 {"level":"info","message":"[POST] /alzcare/v1/auth 200 32.195 ms"}
 {"level":"info","message":"[POST] /alzcare/v1/auth 200 79.24 ms"}
+{"level":"error","message":"Unhandled Rejection: Cannot read properties of undefined (reading '_id')"}
+{"level":"error","message":"Unhandled Rejection: Cannot read properties of undefined (reading 'deviceToken')"}

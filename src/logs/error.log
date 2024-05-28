@@ -19,3 +19,5 @@
 {"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
 {"level":"error","message":"Unhandled Rejection: Notification validation failed: user: Path `user` is required."}
 {"level":"error","message":"Unhandled Rejection: message is not defined"}
+{"level":"error","message":"Unhandled Rejection: Cannot read properties of undefined (reading '_id')"}
+{"level":"error","message":"Unhandled Rejection: Cannot read properties of undefined (reading 'deviceToken')"}

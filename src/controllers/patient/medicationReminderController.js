@@ -19,6 +19,17 @@ exports.getMedicationReminder = asyncHandler(async (req, res) => {
 });
 exports.createMedicationReminder = asyncHandler(async (req, res) => {
   const data = { ...req.body, user: req.user._id };
+  if (req.body.usageSchedule === "يوميا") {
+    req.body.daysOfWeek = [
+      "الأحد",
+      "الاثنين",
+      "الثلاثاء",
+      "الأربعاء",
+      "الخميس",
+      "الجمعة",
+      "السبت",
+    ];
+  }
   const medicationReminder = await dbService.create(
     MedicationReminderModel,
     data

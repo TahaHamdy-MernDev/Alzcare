@@ -29,6 +29,7 @@ async function findAndNotifyReminders() {
     times: currentTime,
   }).populate("user");
   reminders.forEach(async (reminder) => {
+    console.log(reminder);
     const patientMessage = `Time to take your medication: ${reminder.medicationName}`;
     const caregiverMessage = `Reminder for your patient to take medication: ${reminder.medicationName}`;
     if (reminder.user.userType === 1) {
@@ -36,9 +37,11 @@ async function findAndNotifyReminders() {
         patientCode: reminder.user.patientCode,
       });
       const userDeviceToken = user.deviceToken;
+      console.log("userrrrrrr-----------------",user);
       const userId = user._id;
-      const caregiverId = user.careGiver_ID._id;
-      const caregiverDeviceToken = user.careGiver_ID.deviceToken;
+      console.log("careGiver_ID-----------------",user.careGiver_ID);
+      const caregiverId = user.careGiver_ID?._id;
+      const caregiverDeviceToken = user.careGiver_ID?.deviceToken;
       const title = "Medication Reminder";
       if (userDeviceToken && userId) {
         await createAndSaveNotification(userId, patientMessage);
