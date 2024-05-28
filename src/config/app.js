@@ -14,6 +14,7 @@ const admin= require('./firebase/firebase')
 app.use(require('../utils/response/responseHandler'));
 const cron = require('node-cron');
 const { findAndNotifyReminders } = require('./reminders');
+const morgan = require('morgan');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views'));
 
@@ -23,15 +24,7 @@ function getDurationInMilliseconds(start) {
   const diff = process.hrtime(start);
   return (diff[0] * NS_PER_SEC + diff[1]) / NS_TO_MS;
 }
-app.use((req, res, next) => {
-  const start = process.hrtime();
-  res.on('finish', () => { 
-      const durationInMilliseconds = getDurationInMilliseconds(start);
-      logger.info(`[${req.method}] ${req.baseUrl} ${res.statusCode} ${durationInMilliseconds.toLocaleString()} ms`);
-  });
-  next();
-});
-
+app.use(morgan("dev"))
 app.use(express.json({ limit: '10kb' })); 
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(hpp());

@@ -99,6 +99,7 @@ exports.getCurrentUser = asyncHandler(async (req, res) => {
 exports.saveDeviceToken = asyncHandler(async (req, res) => {
   const { token } = req.body;
   const { _id } = req.user;
+  console.log("device tokeeeeeeen: ", token);
   await dbService.updateOne(User, {_id}, { deviceToken: token });
   res.success({ message: 'Device token saved successfully' });
 });

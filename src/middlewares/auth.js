@@ -3,13 +3,13 @@ const { USER_TYPES } = require("../constants/authConstant");
 
 const authenticate = (req, res, next) => {
   const authHeader = req.headers.authorization;
+
   if (authHeader) {
     const tokenParts = authHeader.split(" ");
     if (tokenParts[0] === "Bearer" && tokenParts.length === 2) {
       const token = tokenParts[1];
       try {
         const decodedPayload = jwt.verify(token, process.env.JWT_SECRET);
-   
         req.user = decodedPayload;
         next();
       } catch (error) {
@@ -25,7 +25,7 @@ const authenticate = (req, res, next) => {
   } else {
     res.unAuthorized({ message: "No token provided." });
   }
-};
+}; 
 
 const authorizeRoles =
   (allowedRoles) =>
