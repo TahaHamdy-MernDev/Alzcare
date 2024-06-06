@@ -48,7 +48,7 @@ exports.createComment = asyncHandler(async (req, res) => {
     const post = await databaseService.findOne(PostModel, { _id: req.params.id })
     if (!post) { return res.recordNotFound({ message: "Post not found" }) }
     await uploadAndSet(req, 'image')
-    const user = await databaseService.findOne(User, { _id: post.user._id });
+    const user = await databaseService.findOne(User, { _id: req.user._id });
     const message = `${user.Uname} أضاف تعليقاً على منشورك`;
   
     await createAndSaveNotification(post.user._id, message);
@@ -67,7 +67,7 @@ exports.postToggleLike = asyncHandler(async (req, res) => {
     const likeIndex = post.likes.indexOf(loggedInUser);
     if (likeIndex === -1) {
         post.likes.push(loggedInUser);
-        const user = await databaseService.findOne(User, { _id: post.user._id });
+        const user = await databaseService.findOne(User, { _id: loggedInUser });
         const message =  `${user.Uname} أضاف إعجاباً إلى منشورك`;
         await createAndSaveNotification(post.user._id, message);
         await sendNotification(user.deviceToken,'Community Notification', message);
@@ -85,7 +85,7 @@ exports.commentToggleLike = asyncHandler(async (req, res) => {
     const likeIndex = comment.likes.indexOf(loggedInUser);
     if (likeIndex === -1) {
         comment.likes.push(loggedInUser);
-        const user = await databaseService.findOne(User, { _id: comment.user });
+        const user = await databaseService.findOne(User, { _id: loggedInUser });
         const message =  `${user.Uname} أضاف إعجاباً إلى تعليقك`;
         await createAndSaveNotification(comment.user, message);
         await sendNotification(user.deviceToken,'Community Notification', message);
