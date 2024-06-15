@@ -24,6 +24,7 @@ async function findAndNotifyReminders() {
   const now = new Date();
   const dayOfWeek = getDayOfWeekInArabic(now);
   const currentTime = now.toTimeString().slice(0, 5);
+  console.log(currentTime);
   const reminders = await MedicationReminderModel.find({
     daysOfWeek: dayOfWeek,
     times: currentTime,
