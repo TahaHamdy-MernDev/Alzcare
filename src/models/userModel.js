@@ -95,7 +95,8 @@ userSchema.methods.isPasswordMatch = async function (password) {
   return bcrypt.compare(password, user.password);
 };
 userSchema.pre('findOne', function (next) {
-  this.populate('careGiver_ID').populate('patients')
+  this.populate('careGiver_ID')
+  // .populate('patients')
   next();
 });
 userSchema.method("toJSON", function () {
