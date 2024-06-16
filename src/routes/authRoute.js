@@ -22,5 +22,6 @@ router
     authController.login
   );
 router.post('/current-user',authenticate, authController.getCurrentUser)
+router.get('/get-user/:userId',authenticate, authController.getUser)
 router.post('/save-token',authenticate, authController.saveDeviceToken)
 module.exports = router;

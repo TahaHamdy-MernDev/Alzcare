@@ -96,6 +96,14 @@ exports.getCurrentUser = asyncHandler(async (req, res) => {
   }
   res.success({ data: user });
 });
+exports.getUser = asyncHandler(async(req,res)=>{
+  const {userId}= req.params
+  const user = await dbService.findOne(User, { _id: userId });
+  if (!user) {
+    return res.failure({ message: "user not found...!" });
+  }
+  res.success({ data: user });
+})
 exports.saveDeviceToken = asyncHandler(async (req, res) => {
   const { token } = req.body;
   const { _id } = req.user;
