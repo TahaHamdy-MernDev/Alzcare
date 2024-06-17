@@ -5,10 +5,7 @@ const mongoose = require("mongoose");
 const uri = process.env.NODE_ENV === 'test' ? process.env.DB_TEST_URL : process.env.DB_URL;
 
 // Connect to the MongoDB database using the URI
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true 
-});
+mongoose.connect(uri);
 
 // Get the connection object from mongoose
 let db = mongoose.connection;
@@ -25,3 +22,4 @@ db.on('error', () => {
 
 // Export the mongoose object for use in other files
 module.exports = mongoose;
+ 

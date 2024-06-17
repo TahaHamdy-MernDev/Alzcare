@@ -30,18 +30,12 @@ module.exports = {
     data: responseData(data.data),
   }),
 
-  recordNotFound:(entity = 'Record(s)', data = {}) => ({
+  recordNotFound:( data = {}) => ({
     status: responseStatus.recordNotFound,
     code: 404,
-    message: data.message || `${entity} not found with specified criteria.`,
+    message: data.message || `this item not found with specified criteria.`,
     data: responseData(data.data),
   }),
-  // recordNotFound:(entity = 'Record(s)', data = {}) => ({
-  //   status: responseStatus.recordNotFound,
-  //   code: 404,
-  //   message: data.message || "Record(s) not found with specified criteria.",
-  //   data: responseData(data.data),
-  // }),
 
   validationError: (data = {}) => ({
     status: responseStatus.validationError,
