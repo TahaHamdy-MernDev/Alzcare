@@ -3,7 +3,7 @@ const User = require("../models/userModel");
 const { sendNotification } = require("../services/notificationService");
 const dbService = require("../utils/dbService");
 const { createAndSaveNotification } = require("../utils/notificationHelper");
-// cDDrSRKNStK9EbTdxOrrjg:APA91bGM2YS4-dEx8H0FoVJJy1chzGZ23nlZuO3GXNjp0TslO5EK0XPNru_CusSYw5jTmWPoHVf1BQ6S96Z1Azg9w6eKJ2UMqT4b5Vy3JlIs5F-DMdyZh2_ja3LMweSnszCPXHDgm8C0
+
 function getDayOfWeekInArabic(date) {
   const dayOfWeekEn = date
     .toLocaleDateString("en-US", { weekday: "long" })
@@ -22,15 +22,18 @@ function getDayOfWeekInArabic(date) {
 
 async function findAndNotifyReminders() {
   const now = new Date();
+  now.setHours(now.getHours() + 3); // Add 3 hours to the current time
+
   const dayOfWeek = getDayOfWeekInArabic(now);
-  let currentTime = now.toTimeString().slice(0, 5);
-currentTime + 3
+  const currentTime = now.toTimeString().slice(0, 5);
+
   console.log(currentTime);
   const reminders = await MedicationReminderModel.find({
     daysOfWeek: dayOfWeek,
     times: currentTime,
     endDate: { $gte: now },
   }).populate("user");
+  
   reminders.forEach(async (reminder) => {
     console.log(reminder);
     const patientMessage = `Time to take your medication: ${reminder.medicationName}`;
