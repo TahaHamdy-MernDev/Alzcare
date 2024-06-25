@@ -23,7 +23,8 @@ function getDayOfWeekInArabic(date) {
 async function findAndNotifyReminders() {
   const now = new Date();
   const dayOfWeek = getDayOfWeekInArabic(now);
-  const currentTime = now.toTimeString().slice(0, 5);
+  let currentTime = now.toTimeString().slice(0, 5);
+currentTime + 3
   console.log(currentTime);
   const reminders = await MedicationReminderModel.find({
     daysOfWeek: dayOfWeek,
